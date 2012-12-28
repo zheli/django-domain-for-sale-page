@@ -33,3 +33,8 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#tmp files                                                                                                                                                                       
+*.swp
+.DS_Store
+local_settings.py
