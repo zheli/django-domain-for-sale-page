@@ -1,30 +1,22 @@
-import account.views
-
 from django.contrib import auth, messages
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import CreateView
 
-from .forms import SignupForm
 from .models import OfferForm
 
-class SignupView(account.views.SignupView):
-    
-    form_class = SignupForm
-    
-    def after_signup(self, form):
-        self.create_profile(form)
-        super(SignupView, self).after_signup(form)
-    
-    def create_profile(self, form):
-        profile = self.created_user.profile
-        profile.birthdate = form.cleaned_data["birthdate"]
-        profile.save()
-
 class HomeView(CreateView):
-	template_name = 'home.html'
-	form_class = OfferForm
-	message = {
+    template_name = 'home.html'
+    form_class = OfferForm
+    message = {
                 "level": messages.SUCCESS,
-                "text" : u"intention published."
+                "text" : u"Thanks for your interests! We will contact you soon!"
     }
-	success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')
+    
+    def form_valid(self,form):
+        messages.add_message(
+                self.request,
+                self.message['level'],
+                self.message['text']
+        )
+        return super(HomeView, self).form_valid(form)
