@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "dev.db",
+        "NAME": os.path.abspath(os.path.join(PROJECT_ROOT, "dev.db")),
     }
 }
 
@@ -127,16 +127,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     # theme
-    "pinax_theme_bootstrap_account",
+    #"pinax_theme_bootstrap_account",
     "pinax_theme_bootstrap",
     "django_forms_bootstrap",
     
     # external
-    "account",
+    #"account",
     "metron",
     
     # project
-    "domain_for_sale.profiles",
+    "domain_for_sale",
 ]
 
 # A sample logging configuration. The only tangible logging
